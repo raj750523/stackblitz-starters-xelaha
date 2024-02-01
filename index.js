@@ -18,7 +18,7 @@ app.get("/", (req, res) => {
           startIndex + startPattern.length,
           endIndex
         );
-        console.log(extractedSubstring);
+        res.send(extractedSubstring);
       } else {
         console.log('Substring not found.');
       }
