@@ -1,6 +1,7 @@
-var http = require('http');
-
-http.createServer(function (req, res) {
-  res.writeHead(200, {'Content-Type': 'text/html'});
-  res.end('Hello World!');
-}).listen(8080);
+const express = require("express"); 
+const app = express(); app.get("/", (req, res) => { 
+  res.send("Express on Vercel"); });
+   const PORT = process.env.PORT || 5000;
+    app.listen(PORT, () => { 
+      console.log(`Server is running on port ${PORT}`);
+});
