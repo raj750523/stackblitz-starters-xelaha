@@ -2,7 +2,7 @@ const express = require("express");
 const axios = require("axios")
 const app = express(); 
 app.get("/", (req, res) => { 
-  // res.send("Express on Vercel");
+  res.send("Express on Vercel");
   const url =
   'https://linkredirect.in/visitproduct/1234/PPS16-Myntra-catcard204?id=3217370&shareid=ngSXdVN';
   let startPattern = "'exitID': '";
@@ -18,19 +18,24 @@ app.get("/", (req, res) => {
           startIndex + startPattern.length,
           endIndex
         );
-        res.send(extractedSubstring);
+        console.log(extractedSubstring);
       } else {
-        res.send('Substring not found.');
+        console.log('Substring not found.');
       }
     })
     .catch((error) => {
-      res.send('Error:', error.message);
+      console.log('Error:', error.message);
     });
 
 
 });
    
-app.post("/getExitID", function(req, res){
-  //this is a callback function
-  res.send(req)
-})
+// app.post("/getExitID", function(req, res){
+//   //this is a callback function
+//   res.send(req)
+// })
+
+const PORT = process.env.PORT || 5000;
+    app.listen(PORT, () => { 
+      console.log(`Server is running on port ${PORT}`);
+});
