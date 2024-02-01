@@ -2,7 +2,7 @@ const express = require("express");
 const axios = require("axios")
 const app = express(); 
 app.get("/", (req, res) => { 
-  res.send("Express on Vercel");
+  // res.send("Express on Vercel");
   const url =
   'https://linkredirect.in/visitproduct/1234/PPS16-Myntra-catcard204?id=3217370&shareid=ngSXdVN';
   let startPattern = "'exitID': '";
@@ -10,7 +10,6 @@ app.get("/", (req, res) => {
   axios
     .get(url)
     .then((response) => {
-      console.log('Response:', response.data);
       let html = response.data;
       let startIndex = html.indexOf(startPattern);
       let endIndex = html.indexOf(endPattern, startIndex + startPattern.length);
@@ -19,13 +18,13 @@ app.get("/", (req, res) => {
           startIndex + startPattern.length,
           endIndex
         );
-        console.log(extractedSubstring);
+        res.send(extractedSubstring);
       } else {
-        console.log('Substring not found.');
+        res.send('Substring not found.');
       }
     })
     .catch((error) => {
-      console.error('Error:', error.message);
+      res.send('Error:', error.message);
     });
 
 
