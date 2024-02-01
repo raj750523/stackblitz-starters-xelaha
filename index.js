@@ -1,27 +1,9 @@
 const axios = require('axios');
+const app = require('express')();
+app.get('/api', (req, res) => {
+  const path = `/api/item/${v4()}`;
+  res.setHeader('Content-Type', 'text/html');
+  res.setHeader('Cache-Control', 's-max-age=1, stale-while-revalidate');
+  res.end(`Hello! Go to item: <a href="${path}">${path}</a>`);
+});
 
-const url =
-  'https://linkredirect.in/visitproduct/1234/PPS16-Myntra-catcard204?id=3217370&shareid=ngSXdVN';
-
-let startPattern = "'exitID': '";
-let endPattern = "'";
-axios
-  .get(url)
-  .then((response) => {
-    console.log('Response:', response.data);
-    let html = response.data;
-    let startIndex = html.indexOf(startPattern);
-    let endIndex = html.indexOf(endPattern, startIndex + startPattern.length);
-    if (startIndex != -1 && endIndex != -1) {
-      let extractedSubstring = html.substring(
-        startIndex + startPattern.length,
-        endIndex
-      );
-      console.log(extractedSubstring);
-    } else {
-      console.log('Substring not found.');
-    }
-  })
-  .catch((error) => {
-    console.error('Error:', error.message);
-  });
